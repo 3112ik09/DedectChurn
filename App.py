@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np  # for generating a fake CustomerID
-from sklearn.preprocessing import LabelEncoder
 import joblib
 import pandas as pd
 import numpy as np
@@ -11,18 +10,13 @@ def preprocess_inference_data(input_data):
 
     df['Gender'].replace({"Male":1 , "Female":0} , inplace=True)
     
-
-    # Calculate Total_Spend
     df["Total_Spend"] = df['Subscription_Length_Months'] * df['Monthly_Bill']
 
-    # Calculate Data_Value
     df['Data_Value'] = round(df['Total_Usage_GB'] / df['Monthly_Bill'])
 
-    # Define age group bins and labels
     bins = [17, 35, 55, 71]
     labels = ['Young', 'Middle-aged', 'Senior']
 
-    # Categorize Age_Group
     df['Age_Group'] = pd.cut(df['Age'], bins=bins, labels=labels)
     
     ag = df['Age_Group'].values
@@ -120,17 +114,16 @@ if st.button("Predict Churn"):
     'Age_Group_Young', 'Age_Group_Middle-aged', 'Age_Group_Senior'
 ]
 
-# Reorder the columns in processed_input dictionary
+
     processed_input_reordered = {col: processed_input[col] for col in expected_column_order}
     # Make predictions
     input_data = np.array([processed_input_reordered[col] for col in expected_column_order]).reshape(1, -1)
     
     churn_prediction = best_model.predict(input_data)
 
-    # Display prediction
+   
     if churn_prediction[0] == 1:
         st.error("Churn Prediction: Customer is likely to churn.")
     else:
         st.success("Churn Prediction: Customer is likely to stay.")
 
-# You can add more customization and styling to your app as needed.
