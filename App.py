@@ -3,6 +3,7 @@ import numpy as np  # for generating a fake CustomerID
 import joblib
 import pandas as pd
 import numpy as np
+import os
 
 def preprocess_inference_data(input_data):
     # Create a DataFrame with the input data
@@ -72,7 +73,11 @@ processed_input = preprocess_inference_data(input_data)
 processed_input.head()
 
 # model load
-best_model = joblib.load('best_model.pkl')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Specify the file path relative to the script's directory
+model_file_path = os.path.join(script_dir, 'best_model.pkl')
+best_model = joblib.load(model_file_path)
 
 
 
