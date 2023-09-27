@@ -74,3 +74,5 @@ Not good Prediction
 # Deployment:
 
 Made a streamlit app and hosted the app on stremlit cloud .
+
+* https://ik-dedect-churn.streamlit.app/
