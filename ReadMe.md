@@ -67,3 +67,10 @@ Not good Prediction
 * The dataset lacks in data/ feature that are corelated to the churn . 
 * New feature needed
 * Feature Engineering 
+
+<hr>
+
+
+# Deployment:
+
+Made a streamlit app and hosted the app on stremlit cloud .
