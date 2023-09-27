@@ -73,6 +73,7 @@ Not good Prediction
 
 # Deployment:
 
-Made a streamlit app and hosted the app on stremlit cloud .
-
+* Made Front-End using Streamlit. 
+* load Pickel model make prediction .
+* hosted the app on stremlit cloud .
 * https://ik-dedect-churn.streamlit.app/
