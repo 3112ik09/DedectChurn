@@ -74,14 +74,8 @@ processed_input.head()
 
 # model load
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Specify the file path relative to the script's directory
 model_file_path = os.path.join(script_dir, 'best_model.pkl')
-try:
-    best_model = joblib.load(model_file_path)
-    print("Model loaded successfully.")
-except Exception as e:
-    print(f"Error loading the model: {str(e)}")
+best_model = joblib.load(model_file_path)
 
 
 
