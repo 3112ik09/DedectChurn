@@ -15,7 +15,7 @@ def preprocess_inference_data(input_data):
 
     df['Data_Value'] = round(df['Total_Usage_GB'] / df['Monthly_Bill'])
 
-    bins = [17, 35, 55, 71]
+    bins = [0, 35, 55, 71]
     labels = ['Young', 'Middle-aged', 'Senior']
 
     df['Age_Group'] = pd.cut(df['Age'], bins=bins, labels=labels)
@@ -77,7 +77,11 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Specify the file path relative to the script's directory
 model_file_path = os.path.join(script_dir, 'best_model.pkl')
-best_model = joblib.load(model_file_path)
+try:
+    best_model = joblib.load(model_file_path)
+    print("Model loaded successfully.")
+except Exception as e:
+    print(f"Error loading the model: {str(e)}")
 
 
 
@@ -91,8 +95,8 @@ age = st.number_input("Age", min_value=1, max_value=100, key="age")
 gender = st.selectbox("Gender", ["Male", "Female"], key="gender")
 location = st.selectbox("Location", ["Los Angeles", "New York", "Miami", "Chicago", "Houston"], key="location")
 subscription_length = st.number_input("Subscription Length (Months)", min_value=1, key="subscription_length")
-monthly_bill = st.number_input("Monthly Bill", min_value=0.0, key="monthly_bill")
-total_usage_gb = st.number_input("Total Usage (GB)", min_value=0.0, key="total_usage_gb")
+monthly_bill = st.number_input("Monthly Bill", min_value=1.0, key="monthly_bill")
+total_usage_gb = st.number_input("Total Usage (GB)", min_value=1.0, key="total_usage_gb")
 
 # Encode categorical features
 
